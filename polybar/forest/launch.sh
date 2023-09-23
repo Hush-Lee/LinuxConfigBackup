@@ -14,8 +14,11 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 if type "xrandr"; then
   for m in $(xrandr --query | grep " 1920" | cut -d" " -f1); do
-    MONITOR=$m polybar -c "$DIR"/config.ini &
+    MONITOR=$m polybar -q top  -c "$DIR"/config.ini &
+    MONITOR=$m polybar -q bottom  -c "$DIR"/config.ini &
+
   done
 else
-    polybar -q main -c "$DIR"/config.ini &
+    polybar -q top -c "$DIR"/config.ini &
+    polybar -q bottom -c "$DIR"/config.ini &
 fi
